@@ -1,0 +1,23 @@
+{
+  "name": "manage",
+  "description": "",
+  "main": "main.js",
+  "authors": [
+    "bill <weihao.qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/kwhbill/manage",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/bower_component",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "js-md5": "md5#^0.4.2"
+  }
+}

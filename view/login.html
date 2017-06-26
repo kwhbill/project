@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>欢迎登录</title>
+    <link rel="stylesheet" href="/bower_component/bootstrap/dist/css/bootstrap.css">
+
+</head>
+<body>
+      <div class="container" style="margin-top:180px; ">
+
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">**网站</div>
+                <div class="panel-body">
+                   <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="uname" class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" name="password" id="pwd" placeholder="请输入密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="col-sm-2 control-label">验证码</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="vcode" id="vcode" placeholder="请输入验证码">
+                            </div>
+                            <div class="col-sm-3">
+                                <img id="vcodeimg" src="/account/vcode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <!-- submit有一个默认的提交行为，不要加上 -->
+                                <!-- <button type="submit" onclick="login()"  class="btn btn-default">登录</button> -->
+                                <button id="login"  class="btn btn-default">登录</button>
+                                &nbsp;&nbsp;
+                                <input  id="register" type="button"  value="注册" class="btn btn-danger">
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+            </div>
+    </div>
+</body>
+<script src="/bower_component/jquery/dist/jquery.js"></script>
+<script src="/bower_component/js-md5/src/md5.js"></script>
+
+<script>
+    // 更新验证码
+    $('#vcodeimg').on('click',function () {
+        // ？好面值不同的话，会重新请求图片
+        $(this).attr('src','/account/vcode?id='+Math.random());
+    });
+    //点击登陆
+    $('#login').on('click',function () {
+
+        const username = $("#username").val(),
+              pwd  = md5($('#pwd').val()),
+              vcode =$("#vcode").val();
+
+        $.ajax({
+            type:'post',
+            url: '/account/logindata',
+            data:{
+                username:username,
+                pwd : pwd,
+                vcode:vcode
+            },
+            success:function (data) {
+                console.log(data);
+            }
+        })
+    })
+
+    // 点击注册，跳转到注册页面
+
+    $('#register').on('click',function () {
+        console.log(222);
+        window.location.href = '/account/register'
+    })
+</script>
+
+</html>
